@@ -11,3 +11,10 @@ urlpatterns += [
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
 ]
+urlpatterns += [
+    path('initiate-payment/<int:course_id>/', views.initiate_payment, name='initiate_payment'),
+    path('payment-success/', views.payment_success, name='payment_success'),
+    path('payment-fail/', views.payment_fail, name='payment_fail'),
+    path('payment-cancel/', views.payment_cancel, name='payment_cancel'),
+]
+

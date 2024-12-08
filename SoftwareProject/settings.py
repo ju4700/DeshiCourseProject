@@ -128,3 +128,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SSL_COMMERZ = {
+    'store_id': 'deshi6755788810ad0',
+    'store_passwd': 'deshi6755788810ad0@ssl',
+    'sandbox': True,  # Set to False for live
+}
+

@@ -128,7 +128,7 @@
                 <p class="platform-info"><strong>Platform:</strong> {{ course.platform_name }}</p>
                 <p class="course-description">{{ course.description }}</p>
                 <h3 class="course-price">BDT. {{ course.price }}</h3>
-                <a href="{{ course.affiliate_link }}" target="_blank" class="btn btn-buy">Buy Now</a>
+                <a href="{% url 'initiate_payment' course.id %}" class="btn btn-buy">Buy Now</a>
             </div>
         </div>
     </div>

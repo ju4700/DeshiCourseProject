@@ -140,18 +140,18 @@
                 <ul class="navbar-nav ms-auto">
                     {% if user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link" href="#">Welcome, {{ user.username }}</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="myCoursesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                My Courses
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="myCoursesDropdown">
-                                {% for course in user.bought_courses.all|slice:":4" %}
-                                    <li><a class="dropdown-item" href="{% url 'course_detail' course.id %}">{{ course.title }}</a></li>
-                                {% empty %}
-                                    <li><a class="dropdown-item text-muted">No courses purchased</a></li>
-                                {% endfor %}
-                            </ul>
-                        </li>
+                         <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="myCoursesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    My Courses
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="myCoursesDropdown">
+                                    {% for purchased_course in user.purchased_courses.all %}
+                                        <li><a class="dropdown-item" href="{% url 'course_detail' purchased_course.course.id %}">{{ purchased_course.course.title }}</a></li>
+                                    {% empty %}
+                                        <li><a class="dropdown-item text-muted">No courses purchased</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
                     {% else %}
                         <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
