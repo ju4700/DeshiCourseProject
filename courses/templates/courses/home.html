@@ -140,6 +140,18 @@
                 <ul class="navbar-nav ms-auto">
                     {% if user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link" href="#">Welcome, {{ user.username }}</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="myCoursesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                My Courses
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="myCoursesDropdown">
+                                {% for course in user.bought_courses.all|slice:":4" %}
+                                    <li><a class="dropdown-item" href="{% url 'course_detail' course.id %}">{{ course.title }}</a></li>
+                                {% empty %}
+                                    <li><a class="dropdown-item text-muted">No courses purchased</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
                     {% else %}
                         <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
@@ -149,6 +161,7 @@
             </div>
         </div>
     </nav>
+
 
     <!-- Hero Section -->
     <div class="container hero-section">
@@ -176,7 +189,7 @@
                         <h5 class="card-title">{{ course.title }}</h5>
                         <p class="card-text">{{ course.description|truncatechars:100 }}</p>
                         <p class="text-muted"><strong>Platform:</strong> {{ course.platform_name }}</p>
-                        <a href="{{ course.affiliate_link }}" class="btn btn-buy">Buy for ${{ course.price }}</a>
+                        <a href="{% url 'course_detail' course.id %}" class="btn btn-buy">Buy for BDT.{{ course.price }}</a>
                     </div>
                 </div>
             </div>

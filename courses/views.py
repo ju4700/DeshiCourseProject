@@ -1,5 +1,5 @@
 from django.core.paginator import Paginator
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Course
 
 def home(request):
@@ -16,3 +16,7 @@ def home(request):
         'query': query,
     }
     return render(request, 'courses/home.html', context)
+
+def course_detail(request, course_id):
+    course = get_object_or_404(Course, id=course_id)
+    return render(request, 'courses/course_detail.html', {'course': course})
